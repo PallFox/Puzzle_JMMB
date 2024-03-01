@@ -87,8 +87,8 @@ namespace Puzzle_JMMB
                             newBtn.Text = senderBtn.Text;
                             senderBtn.Text = "";
                             moves++;
+                            break;
                         }
-                        break;
                     }
                     catch { }
                 }
@@ -101,7 +101,7 @@ namespace Puzzle_JMMB
         {
             if(Btn1.Text == "1" && Btn2.Text == "2" && Btn3.Text == "3" && Btn4.Text == "4" && Btn5.Text == "5" && Btn6.Text == "6" && Btn7.Text == "7" && Btn8.Text == "8")
             {
-                DisplayAlert("Puzzle", "Wygrałeś!", "OK");
+                DisplayAlert("Puzzle", "Wygrałeś w " + moves.ToString(), " ruchow!", "OK");
                 GenerateFields();
                 Moves_Label.Text = "Liczba ruchów: 0";
                 moves = 0;
@@ -119,6 +119,13 @@ namespace Puzzle_JMMB
                 newBtn.Text = fields[random].ToString();
                 fields.RemoveAt(random);
             }
+            Btn9.Text = "";
+        }
+
+        private void Gamemode_Checkbox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            GenerateFields();
+            moves = 0;
         }
     }
 }
