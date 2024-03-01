@@ -11,7 +11,7 @@ namespace Puzzle_JMMB
     public partial class MainPage : ContentPage
     {
         int moves = 0;
-        Random rand;
+        Random rand = new Random();
         Button senderBtn;
         int senderId;
         Button newBtn;

@@ -2,17 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Puzzle_JMMB.MainPage">
-    <Grid>
+    <Grid HorizontalOptions="Center" VerticalOptions="Center">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Button AutomationId="Btn1" x:Name="Btn1" Grid.Column="0" Grid.Row="1" Text="1" Clicked="Btn_Clicked"/>
         <Button AutomationId="Btn2" x:Name="Btn2" Grid.Column="1" Grid.Row="1" Text="2" Clicked="Btn_Clicked"/>
@@ -24,8 +24,12 @@
         <Button AutomationId="Btn8" x:Name="Btn8" Grid.Column="1" Grid.Row="3" Text="8" Clicked="Btn_Clicked"/>
         <Button AutomationId="Btn9" x:Name="Btn9" Grid.Column="2" Grid.Row="3" Text="" Clicked="Btn_Clicked"/>
 
-        <Label x:Name="Moves_Label" Text="Liczba ruchów: " Grid.Row="0" Grid.Column="0"/>
-        <CheckBox x:Name="Gamemode_Checkbox" Grid.Column="2" Grid.Row="0"/>
+        <Label x:Name="Moves_Label" Text="Liczba ruchów: 0" Grid.Row="0" Grid.Column="0" FontSize="12"/>
+        <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" HorizontalOptions="End">
+            <Label Text="Zmiana trybu " FontSize="12"/>
+            <CheckBox x:Name="Gamemode_Checkbox"/>
+        </StackLayout>
+        
 
     </Grid>
 </ContentPage>
