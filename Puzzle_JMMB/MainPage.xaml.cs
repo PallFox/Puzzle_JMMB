@@ -10,8 +10,11 @@ namespace Puzzle_JMMB
 {
     public partial class MainPage : ContentPage
     {
-        Random rand = new Random();
-
+        int moves = 0;
+        Random rand;
+        Button senderBtn;
+        int senderId;
+        Button newBtn;
         public MainPage()
         {
             InitializeComponent();
@@ -20,54 +23,78 @@ namespace Puzzle_JMMB
 
         private void Btn_Clicked(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            int id = int.Parse(btn.AutomationId.Substring(3, 1));
-            Button newBtn;
-            if(btn.Text != "")
+            senderBtn = (Button)sender;
+            senderId = int.Parse(senderBtn.AutomationId.Substring(3, 1));
+            if (!Gamemode_Checkbox.IsChecked)
             {
-                try
+                if (senderBtn.Text != "")
                 {
-                    newBtn = (Button)FindByName("Btn" + (id + 3).ToString());
-                    if(newBtn.Text == "")
+                    try
                     {
-                        newBtn.Text = btn.Text;
-                        btn.Text = "";
+                        newBtn = (Button)FindByName("Btn" + (senderId + 3).ToString());
+                        if (newBtn.Text == "")
+                        {
+                            newBtn.Text = senderBtn.Text;
+                            senderBtn.Text = "";
+                            moves++;
+                        }
                     }
-                }
-                catch { }
-                try
-                {
-                    newBtn = (Button)FindByName("Btn" + (id - 3).ToString());
-                    if (newBtn.Text == "")
+                    catch { }
+                    try
                     {
-                        newBtn.Text = btn.Text;
-                        btn.Text = "";
+                        newBtn = (Button)FindByName("Btn" + (senderId - 3).ToString());
+                        if (newBtn.Text == "")
+                        {
+                            newBtn.Text = senderBtn.Text;
+                            senderBtn.Text = "";
+                            moves++;
+                        }
                     }
-                }
-                catch { }
-                try
-                {
-                    newBtn = (Button)FindByName("Btn" + (id + 1).ToString());
-                    if (newBtn.Text == "")
+                    catch { }
+                    try
                     {
-                        newBtn.Text = btn.Text;
-                        btn.Text = "";
+                        newBtn = (Button)FindByName("Btn" + (senderId + 1).ToString());
+                        if (newBtn.Text == "" && senderId % 3 != 0)
+                        {
+                            newBtn.Text = senderBtn.Text;
+                            senderBtn.Text = "";
+                            moves++;
+                        }
                     }
-                }
-                catch { }
-                try
-                {
-                    newBtn = (Button)FindByName("Btn" + (id - 1).ToString());
-                    if (newBtn.Text == "")
+                    catch { }
+                    try
                     {
-                        newBtn.Text = btn.Text;
-                        btn.Text = "";
+                        newBtn = (Button)FindByName("Btn" + (senderId - 1).ToString());
+                        if (newBtn.Text == "" && (senderId - 1) % 3 != 0)
+                        {
+                            newBtn.Text = senderBtn.Text;
+                            senderBtn.Text = "";
+                            moves++;
+                        }
                     }
+                    catch { }
                 }
-                catch { }
-
-                WinCheck();
             }
+            else
+            {
+                for(int i = 1; i<10; i++)
+                {
+                    try
+                    {
+                        newBtn = (Button)FindByName("Btn" + i.ToString());
+                        if (newBtn.Text == "")
+                        {
+                            newBtn.Text = senderBtn.Text;
+                            senderBtn.Text = "";
+                            moves++;
+                        }
+                        break;
+                    }
+                    catch { }
+                }
+            }
+            Moves_Label.Text = moves.ToString();
+            WinCheck();
         }
 
         void WinCheck()
