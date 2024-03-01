@@ -25,7 +25,7 @@
         <Button AutomationId="Btn9" x:Name="Btn9" Grid.Column="2" Grid.Row="3" Text="" Clicked="Btn_Clicked"/>
 
         <Label x:Name="Moves_Label" Text="Liczba ruchów: " Grid.Row="0" Grid.Column="0"/>
-        <CheckBox x:Name="Gamemode_Checkbox" Grid.Column="2" Grid.Row="0"/>
+        <CheckBox x:Name="Gamemode_Checkbox" Grid.Column="2" Grid.Row="0" CheckedChanged="Gamemode_Checkbox_CheckedChanged"/>
 
     </Grid>
 </ContentPage>
