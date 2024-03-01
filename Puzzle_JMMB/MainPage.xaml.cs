@@ -15,6 +15,7 @@ namespace Puzzle_JMMB
         public MainPage()
         {
             InitializeComponent();
+            GenerateFields();
         }
 
         private void Btn_Clicked(object sender, EventArgs e)
@@ -64,9 +65,9 @@ namespace Puzzle_JMMB
                     }
                 }
                 catch { }
-            }
 
-            
+                WinCheck();
+            }
         }
 
         void WinCheck()
@@ -74,6 +75,19 @@ namespace Puzzle_JMMB
             if(Btn1.Text == "1" && Btn2.Text == "2" && Btn3.Text == "3" && Btn4.Text == "4" && Btn5.Text == "5" && Btn6.Text == "6" && Btn7.Text == "7" && Btn8.Text == "8")
             {
                 DisplayAlert("Puzzle", "Wygrałeś!", "OK");
+                GenerateFields();
+            }
+        }
+
+        void GenerateFields()
+        {
+            List<int> fields = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 };
+            for (int i = 1; i < 9; i++)
+            {
+                int random = rand.Next(0, fields.Count - 1);
+                Button newBtn = (Button)FindByName("Btn" + i);
+                newBtn.Text = random.ToString();
+                fields.RemoveAt(random);
             }
         }
     }
