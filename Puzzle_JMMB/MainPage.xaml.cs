@@ -11,7 +11,9 @@ namespace Puzzle_JMMB
     public partial class MainPage : ContentPage
     {
         Random rand;
-
+        Button senderBtn;
+        int senderId;
+        Button newBtn;
         public MainPage()
         {
             InitializeComponent();
@@ -19,54 +21,52 @@ namespace Puzzle_JMMB
 
         private void Btn_Clicked(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            int id = int.Parse(btn.AutomationId.Substring(3, 1));
-            Button newBtn;
-            if(btn.Text != "")
+            senderBtn = (Button)sender;
+            senderId = int.Parse(senderBtn.AutomationId.Substring(3, 1));
+            if(senderBtn.Text != "")
             {
                 try
                 {
-                    newBtn = (Button)FindByName("Btn" + (id + 3).ToString());
+                    newBtn = (Button)FindByName("Btn" + (senderId + 3).ToString());
                     if(newBtn.Text == "")
                     {
-                        newBtn.Text = btn.Text;
-                        btn.Text = "";
+                        newBtn.Text = senderBtn.Text;
+                        senderBtn.Text = "";
                     }
                 }
                 catch { }
                 try
                 {
-                    newBtn = (Button)FindByName("Btn" + (id - 3).ToString());
+                    newBtn = (Button)FindByName("Btn" + (senderId - 3).ToString());
                     if (newBtn.Text == "")
                     {
-                        newBtn.Text = btn.Text;
-                        btn.Text = "";
+                        newBtn.Text = senderBtn.Text;
+                        senderBtn.Text = "";
                     }
                 }
                 catch { }
                 try
                 {
-                    newBtn = (Button)FindByName("Btn" + (id + 1).ToString());
-                    if (newBtn.Text == "")
+                    newBtn = (Button)FindByName("Btn" + (senderId + 1).ToString());
+                    if (newBtn.Text == "" && senderId % 3 != 0)
                     {
-                        newBtn.Text = btn.Text;
-                        btn.Text = "";
+                        newBtn.Text = senderBtn.Text;
+                        senderBtn.Text = "";
                     }
                 }
                 catch { }
                 try
                 {
-                    newBtn = (Button)FindByName("Btn" + (id - 1).ToString());
-                    if (newBtn.Text == "")
+                    newBtn = (Button)FindByName("Btn" + (senderId - 1).ToString());
+                    if (newBtn.Text == "" && (senderId - 1) % 3 != 0)
                     {
-                        newBtn.Text = btn.Text;
-                        btn.Text = "";
+                        newBtn.Text = senderBtn.Text;
+                        senderBtn.Text = "";
                     }
                 }
                 catch { }
             }
-
-            
+            WinCheck();
         }
 
         void WinCheck()
